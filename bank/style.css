@@ -1,0 +1,29 @@
+body{
+    padding: 100px;
+}
+
+.submit-area{
+    margin-top: 50px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    box-shadow: 1px 3px 8px 0px #e0d4d4;
+    width: 500px;
+    margin: auto;
+    padding: 30px;
+}
+
+#transaction-area,.msg{
+    display: none;
+}
+
+.box {
+    border-radius: 10px;
+    box-shadow: 1px 2px 10px 2px #80f178;
+}
+.input{
+    box-shadow: 1px 3px 8px 0px #e0d4d4;
+    padding: 30px;
+}

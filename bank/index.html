@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+
+    <title>Bank</title>
+  </head>
+  <body>
+    
+
+
+<div id="login-area">
+    <h1 class="text-center mb-5">Welcome to Pioneer Bank</h1>
+    <div class="submit-area">
+        <h4>Login</h4>
+        
+            <div class="form-group">
+                <input  class="form-control" placeholder="Enter email" type="text" name="">
+            </div>
+            <div class="form-group">
+                <input  class="form-control" placeholder="Enter password" type="text" name="">
+            </div>
+            <div class="form-group">
+                <button id="login" class="btn btn-success">Submit</button>
+            </div>
+        
+    </div>
+  
+</div>
+
+<div id="transaction-area">
+    <h1 class="text-center mb-5">Transaction Area</h1>
+    <div class="row">
+        <div class="col-md-4 ">
+            <div class="box bg-primary p-4 ">
+                <h5 class="text-white">Deposit</h5>
+                <h2 class="text-white" >$ <span id="depositTotal">00</span></h2>
+            </div>
+        </div>
+        <div class="col-md-4 ">
+           <div class="box bg-secondary p-4 ">
+            <h5 class="text-white">Withdraw</h5>
+            <h2 class="text-white" >$ <span id="withdrawTotal">00</span> </h2>
+           </div>
+        </div>
+        <div class="col-md-4 ">
+            <div class="box bg-info p-4 ">
+                <h5 class="text-white">Blance</h5>
+            <h2 class="text-white">$<span id="blanceTotal">00</span></h2>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-success msg" id="Depositmsg" role="alert">
+                
+            </div>
+            <div class="alert alert-danger msg" id="Insuficentmsg" role="alert">
+               
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="input ">
+                <h4>Deposit</h4>
+
+                <div class="form-group">
+                    <input class="form-control" id='depositNumber' type="text" placeholder="Enter ammount you deposit">
+                </div>
+                <div class="form-group">
+                    <button id="deposit" class="btn btn-success">Deposit</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            
+            <div class="input ">
+                <h4>Withdraw</h4>
+                <div class="form-group">
+                    <input class="form-control" id="withdrawNumber" type="text" placeholder="Enter ammount you withdraw">
+                </div>
+                <div class="form-group">
+                    <button id="withdraw" class="btn btn-primary">Withdraw</button>
+                </div>
+                <span id="error"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+
+
+    var loginBtn=document.getElementById('login');
+    loginBtn.addEventListener('click',function(){
+    var loginArea=document.getElementById('login-area');
+    loginArea.style.display='none';
+
+    var transactionArea=document.getElementById('transaction-area');
+    transactionArea.style.display='block';
+
+    // Deposit button 
+    var deposit=document.getElementById("deposit");
+    deposit.addEventListener('click',function(){
+       var depositNumber=document.getElementById("depositNumber").value;
+       var depositNumbers=parseFloat(depositNumber);
+
+
+        var addDeposit=document.getElementById("depositTotal");
+        var addDeposit=addDeposit.innerText;
+        var addDeposits=parseFloat(addDeposit);
+        var totalDeposit=depositNumbers + addDeposits;
+        document.getElementById('depositTotal').innerText=totalDeposit;
+
+        updateSpanText('blanceTotal',depositNumbers);
+        show('Depositmsg','Deposit Successfull.');
+        time('Depositmsg');
+        document.getElementById('depositNumber').value='';
+    });
+
+    function updateSpanText(id,depositNumber){
+        var currentblance=document.getElementById(id).innerText;
+        var currentblanceNumber=parseFloat(currentblance)
+        ;
+        var totalBlance=currentblanceNumber + depositNumber;
+        document.getElementById(id).innerText=totalBlance;
+    }
+
+        // withdraw button
+        function time(msg){
+            setTimeout(function(){
+                document.getElementById(msg).style.display='none';
+                 },2000);
+        }
+        function show(msg,text){
+                document.getElementById(msg).style.display='block';
+                document.getElementById(msg).innerText=text;
+        }
+
+        var withdrawBtn=document.getElementById("withdrawNumber");
+        withdraw.addEventListener('click',function(){
+        var withdrawNumber=getInputNumber('withdrawNumber');
+
+        
+
+        var currentblanceValidation=document.getElementById('blanceTotal').innerText;
+        var de=document.getElementById('withdrawTotal').innerText;
+
+        var total=currentblanceValidation-withdrawNumber;
+
+        if(total < 0){
+            show('Insuficentmsg','Insuficent Balance!');
+            time('Insuficentmsg');
+        }else{
+
+            updateSpanText('withdrawTotal',withdrawNumber);
+            updateSpanText('blanceTotal',-1*withdrawNumber);
+            show('Depositmsg','Withdraw Successfull.');
+            time('Depositmsg');
+        }
+
+        
+
+        document.getElementById('withdrawNumber').value='';
+
+
+    });
+
+    function getInputNumber(id){
+        var currentblance=document.getElementById(id).value;
+        var withdrawNumber=parseFloat(currentblance);
+        var currentblanceNumber=parseFloat(currentblance)
+        ;
+        return currentblanceNumber;
+    }
+
+});
+
+
+
+
+</script>
+   
+  </body>
+</html>
